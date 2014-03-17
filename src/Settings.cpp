@@ -11,8 +11,45 @@ Settings::Settings() :
 		m_tileColor(sf::Color(0, 0, 255)),
 		m_tileHoverColor(sf::Color(220, 0, 170)),
 		m_tilePressedColor(sf::Color(200, 0, 150)),
-		m_space(10)
+		m_backgroundColor(sf::Color(200, 0, 0)),
+		m_screenWidth(800),
+		m_screenHeight(600),
+		m_space(30)
 {
-	// TODO Auto-generated constructor stub
 
+}
+
+sf::Color Settings::getTileColor() const
+{
+	return m_tileColor;
+}
+
+sf::Color Settings::getTileHoverColor() const
+{
+	return m_tileHoverColor;
+}
+
+sf::Color Settings::getTilePressedColor() const
+{
+	return m_tilePressedColor;
+}
+
+sf::Color Settings::getBackgroundColor() const
+{
+	return m_backgroundColor;
+}
+
+unsigned Settings::getSpace() const
+{
+	return m_space;
+}
+
+unsigned Settings::getScreenWidth() const
+{
+	return m_screenWidth;
+}
+
+unsigned Settings::getScreenHeight() const
+{
+	return m_screenHeight;
 }

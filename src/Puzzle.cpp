@@ -7,7 +7,6 @@
 //============================================================================
 
 
-#include "TextTile.h"
 #include "PuzzleGame.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -16,13 +15,13 @@
 #include <boost/shared_ptr.hpp>
 
 int main(int argc, char* argv[]) {
-	unsigned gameSize = 4;
+	unsigned gameSize = 3;
 	//std::cout << "Rozmiar gry: ";
 	//std::cin >> gameSize;
 	sf::RenderWindow window(sf::VideoMode(800, 600, 32), "Puzzle game - Zaawansowane C++ - Lukasz Kresa");
 	window.SetPosition(0, 0);
-	PuzzleGame *game = new PuzzleGame(gameSize);
-
+	PuzzleGame *game = new PuzzleGame(window, gameSize);
+/*
 	sf::Image img1, img2;
 	if(!img1.LoadFromFile("doge.png"))
 		std::cout << "doge.png not found.\n";
@@ -77,8 +76,7 @@ int main(int argc, char* argv[]) {
 		for(auto it = tiles.begin(); it != tiles.end(); ++it)
 			(*it)->draw(window);
 		window.Display();
-		//window.Clear(sf::Color(200, 0, 0));
-	}
+	}*/
 
 	return EXIT_SUCCESS;
 }

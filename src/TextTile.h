@@ -14,7 +14,6 @@
 class TextTile: public Tile
 {
 public:
-	//typedef boost::shared_ptr<sf::Shape> Ptr;
 	TextTile(unsigned nr, unsigned x, unsigned y, unsigned size);
 	unsigned getNr();
 	virtual void setX(unsigned x);
