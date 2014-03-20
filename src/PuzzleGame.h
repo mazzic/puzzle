@@ -17,16 +17,19 @@ class PuzzleGame
 {
 public:
 	typedef std::vector<boost::shared_ptr<Tile> > Tiles;
+	typedef std::vector<std::vector<boost::shared_ptr<Tile> > > PTiles;
 
 	PuzzleGame(sf::RenderWindow& window, unsigned size);
 	virtual ~PuzzleGame();
 private:
 	Settings m_settings;
 	Tiles m_tiles;
+	PTiles m_ptiles;
 	sf::RenderWindow& m_window;
 	unsigned m_gameSize;
 	void createTiles();
 	void processEvents();
+	void drawAll();
 	unsigned calculateGameSize();
 };
 
