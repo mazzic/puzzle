@@ -14,7 +14,7 @@
 class TextTile: public Tile
 {
 public:
-	TextTile(unsigned nr, unsigned x, unsigned y, unsigned size, bool visible);
+	TextTile(unsigned nr, unsigned x, unsigned y, unsigned size);
 	unsigned getNr();
 	virtual void setX(unsigned x);
 	virtual void setY(unsigned y);

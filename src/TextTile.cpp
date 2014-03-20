@@ -11,10 +11,9 @@
 #include <iostream>
 #include <string>
 
-TextTile::TextTile(unsigned nr, unsigned x, unsigned y, unsigned size, bool visible)
+TextTile::TextTile(unsigned nr, unsigned x, unsigned y, unsigned size)
 					: m_nr(nr), m_size(size), m_x(x), m_y(y)
 {
-	setVisibility(visible);
 	m_shape = sf::Shape::Rectangle(x, y, x + size, y + size, sf::Color(0, 0, 255), 2);
 	m_x = x;
 	m_y = y;
@@ -60,7 +59,7 @@ unsigned TextTile::getNr()
 
 void TextTile::draw(sf::RenderWindow &window)
 {
-	if(getVisibility())
+	if(m_nr != 0)
 	{
 		window.Draw(m_shape);
 		window.Draw(text);

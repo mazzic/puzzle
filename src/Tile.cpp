@@ -22,13 +22,3 @@ void Tile::setPosition(unsigned x, unsigned y)
 void Tile::onClick()
 {
 }
-
-bool Tile::getVisibility()
-{
-	return m_visible;
-}
-
-void Tile::setVisibility(bool v)
-{
-	m_visible = v;
-}
