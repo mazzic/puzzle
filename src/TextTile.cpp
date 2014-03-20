@@ -77,14 +77,17 @@ bool TextTile::contains(unsigned x, unsigned y)
 void TextTile::onClick()
 {
 	static bool clicked = false;
-	if(clicked == false)
+	if(m_nr != 0)
 	{
-		m_shape.SetColor(sf::Color(200, 0, 150));
-		clicked = true;
-	}
-	else
-	{
-		m_shape.SetColor(sf::Color(0, 0, 255));
-		clicked = false;
+		if(clicked == false)
+		{
+			m_shape.SetColor(sf::Color(200, 0, 150));
+			clicked = true;
+		}
+		else
+		{
+			m_shape.SetColor(sf::Color(0, 0, 255));
+			clicked = false;
+		}
 	}
 }
