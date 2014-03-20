@@ -14,7 +14,7 @@
 class TextTile: public Tile
 {
 public:
-	TextTile(unsigned nr, unsigned x, unsigned y, unsigned size);
+	TextTile(unsigned nr, unsigned x, unsigned y, unsigned size, bool visible);
 	unsigned getNr();
 	virtual void setX(unsigned x);
 	virtual void setY(unsigned y);
@@ -25,7 +25,7 @@ public:
 	virtual void onClick();
 
 private:
-	std::string m_string;
+	unsigned m_nr;
 	unsigned m_size;
 	unsigned m_x;
 	unsigned m_y;

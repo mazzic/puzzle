@@ -34,7 +34,7 @@ void PuzzleGame::createTiles()
 		for(unsigned j = 0; j < m_gameSize; ++j)
 		{
 			boost::shared_ptr<Tile> tile(new TextTile((i * m_gameSize) + j+ 1, space + j * (size + space),
-					space + i * (size + space), size));
+					space + i * (size + space), size, true));
 			m_ptiles[i].push_back(tile);
 		}
 	}

@@ -24,10 +24,12 @@ public:
 	virtual bool contains(unsigned x, unsigned y) = 0;
 	virtual unsigned getX() = 0;
 	virtual unsigned getY() = 0;
-
 	virtual void onClick();
-private:
+	bool getVisibility();
+	void setVisibility(bool v);
 
+private:
+	bool m_visible;
 };
 
 #endif /* TILE_H_ */

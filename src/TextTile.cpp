@@ -11,10 +11,10 @@
 #include <iostream>
 #include <string>
 
-TextTile::TextTile(unsigned nr, unsigned x, unsigned y, unsigned size)
-					: m_size(size), m_x(x), m_y(y)
+TextTile::TextTile(unsigned nr, unsigned x, unsigned y, unsigned size, bool visible)
+					: m_nr(nr), m_size(size), m_x(x), m_y(y)
 {
-	m_string = std::to_string(nr);
+	setVisibility(visible);
 	m_shape = sf::Shape::Rectangle(x, y, x + size, y + size, sf::Color(0, 0, 255), 2);
 	m_x = x;
 	m_y = y;
@@ -25,9 +25,9 @@ TextTile::TextTile(unsigned nr, unsigned x, unsigned y, unsigned size)
 	{
 		std::cout << "Font file not found.\n";
 	}
-	text.SetText(m_string.c_str());
+	text.SetText(std::to_string(m_nr));
 	text.SetSize(18);
-	//text.SetFont(font);
+	text.SetFont(font);
 	text.Move((x + x + size)/2, (y + y + size)/2);
 }
 
@@ -55,13 +55,16 @@ unsigned TextTile::getY()
 
 unsigned TextTile::getNr()
 {
-	return strtol(m_string.c_str(), NULL, 10);
+	return m_nr;
 }
 
 void TextTile::draw(sf::RenderWindow &window)
 {
-	window.Draw(m_shape);
-	window.Draw(text);
+	if(getVisibility())
+	{
+		window.Draw(m_shape);
+		window.Draw(text);
+	}
 }
 
 bool TextTile::contains(unsigned x, unsigned y)
