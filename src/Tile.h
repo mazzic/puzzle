@@ -17,7 +17,9 @@ public:
 	Tile();
 	virtual ~Tile(){}
 
-	void setPosition(unsigned x, unsigned y);
+	virtual void setPosition(unsigned x, unsigned y) = 0;
+	virtual unsigned getNr() = 0;
+	virtual void setNr(unsigned nr) = 0;
 	virtual void setX(unsigned X) = 0;
 	virtual void setY(unsigned Y) = 0;
 	virtual void draw(sf::RenderWindow &window) = 0;
@@ -25,6 +27,7 @@ public:
 	virtual unsigned getX() = 0;
 	virtual unsigned getY() = 0;
 	virtual void onClick();
+	virtual bool visible() = 0;
 
 
 private:

@@ -15,14 +15,17 @@ class TextTile: public Tile
 {
 public:
 	TextTile(unsigned nr, unsigned x, unsigned y, unsigned size);
-	unsigned getNr();
+	virtual unsigned getNr();
+	virtual void setNr(unsigned nr);
 	virtual void setX(unsigned x);
 	virtual void setY(unsigned y);
+	virtual void setPosition(unsigned x, unsigned y);
 	virtual unsigned getX();
 	virtual unsigned getY();
 	virtual bool contains(unsigned x, unsigned y);
 	virtual void draw(sf::RenderWindow &window);
 	virtual void onClick();
+	virtual bool visible();
 
 private:
 	unsigned m_nr;

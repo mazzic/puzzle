@@ -14,11 +14,6 @@ Tile::Tile()
 
 }
 
-void Tile::setPosition(unsigned x, unsigned y)
-{
-
-}
-
 void Tile::onClick()
 {
 }

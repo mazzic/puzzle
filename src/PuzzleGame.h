@@ -31,6 +31,8 @@ private:
 	void gameplay();
 	void drawAll();
 	unsigned calculateGameSize();
+	void tileClicked(boost::shared_ptr<Tile> tile);
+	void switchTiles(boost::shared_ptr<Tile> tile);
 };
 
 #endif /* GAME_H_ */
