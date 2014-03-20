@@ -12,7 +12,7 @@ PuzzleGame::PuzzleGame(sf::RenderWindow& window, unsigned size) :
 		m_window(window), m_gameSize(size)
 {
 	createTiles();
-	processEvents();
+	gameplay();
 }
 
 PuzzleGame::~PuzzleGame()
@@ -40,7 +40,7 @@ void PuzzleGame::createTiles()
 	}
 }
 
-void PuzzleGame::processEvents()
+void PuzzleGame::gameplay()
 {
 	while(m_window.IsOpened())
 	{

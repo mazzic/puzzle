@@ -28,7 +28,7 @@ private:
 	sf::RenderWindow& m_window;
 	unsigned m_gameSize;
 	void createTiles();
-	void processEvents();
+	void gameplay();
 	void drawAll();
 	unsigned calculateGameSize();
 };
