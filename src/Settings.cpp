@@ -14,7 +14,21 @@ Settings::Settings() :
 		m_backgroundColor(sf::Color(200, 0, 0)),
 		m_screenWidth(800),
 		m_screenHeight(600),
-		m_space(30)
+		m_space(30),
+		m_gameSize(3)
+{
+
+}
+
+Settings::Settings(unsigned gameSize, unsigned width, unsigned height) :
+		m_tileColor(sf::Color(0, 0, 255)),
+		m_tileHoverColor(sf::Color(220, 0, 170)),
+		m_tilePressedColor(sf::Color(200, 0, 150)),
+		m_backgroundColor(sf::Color(200, 0, 0)),
+		m_screenWidth(width),
+		m_screenHeight(height),
+		m_space(30),
+		m_gameSize(gameSize)
 {
 
 }
@@ -52,4 +66,9 @@ unsigned Settings::getScreenWidth() const
 unsigned Settings::getScreenHeight() const
 {
 	return m_screenHeight;
+}
+
+unsigned Settings::getGameSize() const
+{
+	return m_gameSize;
 }
