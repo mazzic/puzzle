@@ -6,6 +6,12 @@
 // Description : Klasa reprezentująca kafelek.
 //============================================================================
 
+/*! \class Tile
+    \brief Class representing a tile object.
+
+    A more detailed class description.
+*/
+
 #ifndef TILE_H_
 #define TILE_H_
 
