@@ -1,9 +1,10 @@
-/*
- * Settings.cpp
- *
- *  Created on: Mar 16, 2014
- *      Author: amr
- */
+//============================================================================
+// Name        : Settings.cpp
+// Author      : Lukasz Kresa
+// Version     :
+// Copyright   : ---
+// Description : Settings class.
+//============================================================================
 
 #include "Settings.h"
 
@@ -33,22 +34,22 @@ Settings::Settings(unsigned gameSize, unsigned width, unsigned height) :
 
 }
 
-sf::Color Settings::getTileColor() const
+const sf::Color& Settings::getTileColor() const
 {
 	return m_tileColor;
 }
 
-sf::Color Settings::getTileHoverColor() const
+const sf::Color& Settings::getTileHoverColor() const
 {
 	return m_tileHoverColor;
 }
 
-sf::Color Settings::getTilePressedColor() const
+const sf::Color& Settings::getTilePressedColor() const
 {
 	return m_tilePressedColor;
 }
 
-sf::Color Settings::getBackgroundColor() const
+const sf::Color& Settings::getBackgroundColor() const
 {
 	return m_backgroundColor;
 }

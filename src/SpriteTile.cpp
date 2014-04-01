@@ -18,7 +18,7 @@ void SpriteTile::setSprite(sf::Sprite spr)
 	sprite = spr;
 }
 
-sf::Sprite& SpriteTile::getSprite()
+const sf::Sprite& SpriteTile::getSprite()
 {
 	return sprite;
 }

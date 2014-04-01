@@ -12,10 +12,10 @@
 #include <boost/tokenizer.hpp>
 #include <SFML/System/Clock.hpp>
 #include <SFML/Graphics.hpp>
-#include <thread>
 
-PuzzleGame::PuzzleGame(sf::RenderWindow& window, unsigned size) :
-		m_status(GameStatus_Running), m_window(window), m_gameSize(size),
+PuzzleGame::PuzzleGame(sf::RenderWindow& window, Settings& settings) :
+		m_settings(settings),
+		m_status(GameStatus_Running), m_window(window),
 		m_toBeRestarted(false)
 {
 	createTiles();
@@ -29,20 +29,21 @@ PuzzleGame::~PuzzleGame()
 
 void PuzzleGame::createTiles()
 {
-	std::vector<unsigned> tileValues = getStartingTiles(m_gameSize);
+	unsigned gameSize = m_settings.getGameSize();
+	std::vector<unsigned> tileValues = getStartingTiles(gameSize);
 
 	// space between tiles
 	unsigned space = m_settings.getSpace();
 	// determining size of tile
 	unsigned size = calculateTileSize();
 
-	for(unsigned i = 0; i < m_gameSize; ++i)
+	for(unsigned i = 0; i < gameSize; ++i)
 	{
 		Tiles vect;
 		m_tiles.push_back(vect);
-		for(unsigned j = 0; j < m_gameSize; ++j)
+		for(unsigned j = 0; j < gameSize; ++j)
 		{
-			boost::shared_ptr<Tile> tile(new TextTile(tileValues[(i * m_gameSize) + j], space + j * (size + space),
+			boost::shared_ptr<Tile> tile(new TextTile(tileValues[(i * gameSize) + j], space + j * (size + space),
 								space + i * (size + space), size));
 			m_tiles[i].push_back(tile);
 		}
@@ -112,13 +113,14 @@ unsigned PuzzleGame::calculateTileSize()
 	unsigned width = m_settings.getScreenWidth();
 	unsigned height = m_settings.getScreenHeight();
 	unsigned space = m_settings.getSpace();
+	unsigned gameSize = m_settings.getGameSize();
 	unsigned lesserDimension;
 	if(width > height) lesserDimension = height;
 	else			   lesserDimension = width;
-	return (lesserDimension - (m_gameSize+1) * space)/m_gameSize;
+	return (lesserDimension - (gameSize+1) * space)/gameSize;
 }
 
-void PuzzleGame::tileClicked(boost::shared_ptr<Tile> tile)
+void PuzzleGame::tileClicked(Tile::Ptr tile)
 {
 	switchTiles(tile);
 	tile->onClick();
@@ -128,15 +130,16 @@ void PuzzleGame::tileClicked(boost::shared_ptr<Tile> tile)
 
 bool PuzzleGame::checkForSuccess()
 {
+	unsigned gameSize = m_settings.getGameSize();
 	for(unsigned i = 0; i < m_tiles.size(); ++i)
 	{
 		for(unsigned j = 0; j < m_tiles[i].size(); ++j)
 		{
 			// if not the right down corner
-			if((i+j) != 2*(m_gameSize-1))
+			if((i+j) != 2*(gameSize-1))
 			{
 				// check if tile at specific position has a right number
-				if(m_tiles[i][j]->getNr() != (i*m_gameSize + j + 1))
+				if(m_tiles[i][j]->getNr() != (i*gameSize + j + 1))
 					return false;
 			}
 		}
@@ -144,7 +147,7 @@ bool PuzzleGame::checkForSuccess()
 	return true;
 }
 
-std::vector<unsigned> PuzzleGame::getStartingTiles(unsigned gameSize)
+const PuzzleGame::TilesNumbers PuzzleGame::getStartingTiles(unsigned gameSize)
 {
 	typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 	boost::char_separator<char> sep(" ");
@@ -204,7 +207,7 @@ void PuzzleGame::deletingTilesAtEnd()
 	}
 }
 
-void PuzzleGame::switchTiles(boost::shared_ptr<Tile> tile)
+void PuzzleGame::switchTiles(Tile::Ptr tile)
 {
 	unsigned clickedTileRow, clickedTileColumn;
 	// determining clicked tile coordinates

@@ -7,19 +7,19 @@
 //============================================================================
 
 /*! \class Tile
-    \brief Class representing a tile object.
-
-    A more detailed class description.
+    \brief Abstract class representing a tile object.
 */
 
 #ifndef TILE_H_
 #define TILE_H_
 
+#include <boost/shared_ptr.hpp>
 #include <SFML/Graphics.hpp>
 
 class Tile
 {
 public:
+	typedef boost::shared_ptr<Tile> Ptr;
 	Tile();
 	virtual ~Tile(){}
 

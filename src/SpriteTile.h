@@ -11,12 +11,19 @@
 #include "Tile.h"
 #include <SFML/Graphics.hpp>
 
+/*! \class SpriteTile
+    \brief Class representing a SpriteTile object.
+
+    SpriteTile is a tile with an image instead of a number.
+    Actually NOT IMPLEMENTED, NOT USED.
+*/
+
 class SpriteTile: public Tile
 {
 public:
 	SpriteTile();
 	void setSprite(sf::Sprite);
-	sf::Sprite& getSprite();
+	const sf::Sprite& getSprite();
 	virtual void setPosition(unsigned x, unsigned y);
 	virtual void setX(unsigned x);
 	virtual void setY(unsigned y);
