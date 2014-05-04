@@ -20,10 +20,8 @@ TextTile::TextTile(unsigned nr, unsigned x, unsigned y, unsigned size)
 	m_size = size;
 	std::cout << x << " " << y << "\n";
 
-	if(!font.LoadFromFile("Consolas.ttf", 24))
-	{
-		std::cout << "Font file not found.\n";
-	}
+	font = sf::Font::GetDefaultFont();
+
 	text.SetText(std::to_string(m_nr));
 	text.SetSize(18);
 	text.SetFont(font);
@@ -47,7 +45,6 @@ void TextTile::setPosition(unsigned x, unsigned y)
 {
 	setX(x);
 	setY(y);
-
 }
 
 unsigned TextTile::getX()
