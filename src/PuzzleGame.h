@@ -65,6 +65,7 @@ private:
 	const TilesNumbers getStartingTiles(unsigned gameSize);
 	void 		switchTiles(Tile::Ptr tile);
 	void 		tileClicked(Tile::Ptr tile);
+	void 		move(sf::Key::Code code);
 
 	Settings& 			m_settings;
 	VTiles 				m_tiles;

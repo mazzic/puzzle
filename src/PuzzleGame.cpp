@@ -85,6 +85,12 @@ void PuzzleGame::gameplay()
 					else break;
 				}
 			}
+			if((event.Type == sf::Event::KeyPressed))
+			{
+				move(event.Key.Code);
+			}
+
+
 		}
 		if(m_status == GameStatus_Ended)
 		{
@@ -160,13 +166,13 @@ const PuzzleGame::TilesNumbers PuzzleGame::getStartingTiles(unsigned gameSize)
 		printf("Unable to load starting_positions.txt file.\n");
 		m_window.Close();
 	}
-	std::vector<std::vector<unsigned> > loadedGames;
+	std::vector<TilesNumbers> loadedGames;
 	while ( getline (file,line) )
 	{
 		unsigned pos = line.find(" ");
 		if(line.substr(0, pos) == std::to_string(gameSize*gameSize - 1))
 		{
-			std::vector<unsigned> tileValues;
+			TilesNumbers tileValues;
 			tokenizer tokens(line, sep);
 			for(tokenizer::iterator it = tokens.begin(); it != tokens.end(); ++it)
 			{
@@ -179,7 +185,6 @@ const PuzzleGame::TilesNumbers PuzzleGame::getStartingTiles(unsigned gameSize)
 			loadedGames.push_back(tileValues);
 			std::cout << line << "\n";
 		}
-			//std::cout << line << '\n';
 	}
 	file.close();
 
@@ -227,7 +232,7 @@ void PuzzleGame::switchTiles(Tile::Ptr tile)
 	{
 		if(m_tiles[clickedTileRow - 1][clickedTileColumn]->getNr() == 0)
 		{
-			boost::shared_ptr<Tile> empty = m_tiles[clickedTileRow -1][clickedTileColumn];
+			Tile::Ptr empty = m_tiles[clickedTileRow -1][clickedTileColumn];
 			printf("Empty tile at the position [%u, %u]\n", clickedTileRow -1, clickedTileColumn);
 			unsigned emptyNr = empty->getNr();
 			empty->setNr(tile->getNr());
@@ -240,7 +245,7 @@ void PuzzleGame::switchTiles(Tile::Ptr tile)
 		if(m_tiles[clickedTileRow + 1][clickedTileColumn]->getNr() == 0)
 		{
 			printf("Empty tile at the position [%u, %u]\n", clickedTileRow +1, clickedTileColumn);
-			boost::shared_ptr<Tile> empty = m_tiles[clickedTileRow+1][clickedTileColumn];
+			Tile::Ptr empty = m_tiles[clickedTileRow+1][clickedTileColumn];
 			unsigned emptyNr = empty->getNr();
 			empty->setNr(tile->getNr());
 			tile->setNr(emptyNr);
@@ -251,7 +256,7 @@ void PuzzleGame::switchTiles(Tile::Ptr tile)
 		if(m_tiles[clickedTileRow][clickedTileColumn - 1]->getNr() == 0)
 		{
 			printf("Empty tile at the position [%u, %u]\n", clickedTileRow, clickedTileColumn -1);
-			boost::shared_ptr<Tile> empty = m_tiles[clickedTileRow][clickedTileColumn-1];
+			Tile::Ptr empty = m_tiles[clickedTileRow][clickedTileColumn-1];
 			unsigned emptyNr = empty->getNr();
 			empty->setNr(tile->getNr());
 			tile->setNr(emptyNr);
@@ -262,7 +267,7 @@ void PuzzleGame::switchTiles(Tile::Ptr tile)
 		if(m_tiles[clickedTileRow][clickedTileColumn + 1]->getNr() == 0)
 		{
 			printf("Empty tile at the position [%u, %u]\n", clickedTileRow, clickedTileColumn+1);
-			boost::shared_ptr<Tile> empty = m_tiles[clickedTileRow][clickedTileColumn+1];
+			Tile::Ptr empty = m_tiles[clickedTileRow][clickedTileColumn+1];
 			unsigned emptyNr = empty->getNr();
 			empty->setNr(tile->getNr());
 			tile->setNr(emptyNr);
@@ -301,4 +306,48 @@ void PuzzleGame::askForRestart()
 bool PuzzleGame::toBeRestarted() const
 {
 	return m_toBeRestarted;
+}
+
+void PuzzleGame::move(sf::Key::Code code)
+{
+	if(code == sf::Key::Left)
+		std::cout << "Left key pressed.\n";
+	if(code == sf::Key::Right)
+		std::cout << "Right key pressed.\n";
+	if(code == sf::Key::Up)
+		std::cout << "Up key pressed.\n";
+	if(code == sf::Key::Down)
+		std::cout << "Down key pressed.\n";
+
+	for(unsigned i = 0; i < m_tiles.size(); ++i)
+	{
+		for(unsigned j = 0; j < m_tiles[i].size(); ++j)
+			if(m_tiles[i][j]->getNr() == 0)
+			{
+				std::cout << "Found zero.\n";
+				auto zero = m_tiles[i][j];
+				if(code == sf::Key::Up)
+				{
+					if(i < m_tiles.size() - 1)
+						tileClicked(m_tiles[i+1][j]);
+				}
+				if(code == sf::Key::Down)
+				{
+					if(i > 0)
+						tileClicked(m_tiles[i-1][j]);
+				}
+				if(code == sf::Key::Left)
+				{
+					if(j < m_tiles[i].size() - 1)
+						tileClicked(m_tiles[i][j+1]);
+				}
+				if(code == sf::Key::Right)
+				{
+					if( j > 0)
+						tileClicked(m_tiles[i][j-1]);
+				}
+				return;
+
+			}
+	}
 }
