@@ -21,7 +21,7 @@
 class SpriteTile: public Tile
 {
 public:
-	SpriteTile();
+	SpriteTile(unsigned nr, unsigned x, unsigned y, unsigned size);
 	void setSprite(sf::Sprite);
 	const sf::Sprite& getSprite();
 	virtual void setPosition(unsigned x, unsigned y);

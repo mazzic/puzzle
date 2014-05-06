@@ -70,7 +70,6 @@ void PuzzleGame::gameplay()
 				{
 					if(m_status == GameStatus_Running)
 					{
-						std::cout << "asdadas\n";
 						for(auto it2 = it->begin(); it2 != it->end(); ++it2)
 							if(m_status == GameStatus_Running)
 							{
@@ -310,18 +309,10 @@ bool PuzzleGame::toBeRestarted() const
 
 void PuzzleGame::move(sf::Key::Code code)
 {
-	if(code == sf::Key::Left)
-		std::cout << "Left key pressed.\n";
-	if(code == sf::Key::Right)
-		std::cout << "Right key pressed.\n";
-	if(code == sf::Key::Up)
-		std::cout << "Up key pressed.\n";
-	if(code == sf::Key::Down)
-		std::cout << "Down key pressed.\n";
-
 	for(unsigned i = 0; i < m_tiles.size(); ++i)
 	{
 		for(unsigned j = 0; j < m_tiles[i].size(); ++j)
+		{
 			if(m_tiles[i][j]->getNr() == 0)
 			{
 				std::cout << "Found zero.\n";
@@ -347,7 +338,7 @@ void PuzzleGame::move(sf::Key::Code code)
 						tileClicked(m_tiles[i][j-1]);
 				}
 				return;
-
 			}
+		}
 	}
 }

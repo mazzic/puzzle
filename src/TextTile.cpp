@@ -12,7 +12,7 @@
 #include <string>
 
 TextTile::TextTile(unsigned nr, unsigned x, unsigned y, unsigned size)
-					: m_nr(nr), m_size(size), m_x(x), m_y(y)
+					: Tile(nr, x, y, size)
 {
 	m_shape = sf::Shape::Rectangle(x, y, x + size, y + size, sf::Color(0, 0, 255), 2);
 	m_x = x;
@@ -45,23 +45,6 @@ void TextTile::setPosition(unsigned x, unsigned y)
 {
 	setX(x);
 	setY(y);
-}
-
-unsigned TextTile::getX()
-{
-	printf("getX: %u\n", m_x);
-	return m_x;
-}
-
-unsigned TextTile::getY()
-{
-	printf("getY: %u\n", m_y);
-	return m_y;
-}
-
-unsigned TextTile::getNr()
-{
-	return m_nr;
 }
 
 void TextTile::draw(sf::RenderWindow &window)
@@ -99,11 +82,6 @@ void TextTile::onClick()
 			clicked = false;
 		}
 	}
-}
-
-bool TextTile::visible()
-{
-	return m_nr;
 }
 
 void TextTile::setNr(unsigned nr)

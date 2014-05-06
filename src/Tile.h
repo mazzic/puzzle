@@ -20,23 +20,33 @@ class Tile
 {
 public:
 	typedef boost::shared_ptr<Tile> Ptr;
-	Tile();
+	Tile(unsigned nr, unsigned x, unsigned y, unsigned size);
 	virtual ~Tile(){}
 
 	virtual void setPosition(unsigned x, unsigned y) = 0;
-	virtual unsigned getNr() = 0;
-	virtual void setNr(unsigned nr) = 0;
 	virtual void setX(unsigned X) = 0;
 	virtual void setY(unsigned Y) = 0;
 	virtual void draw(sf::RenderWindow &window) = 0;
 	virtual bool contains(unsigned x, unsigned y) = 0;
-	virtual unsigned getX() = 0;
-	virtual unsigned getY() = 0;
 	virtual void onClick();
-	virtual bool visible() = 0;
+
+	unsigned 		getNr();
+	virtual void	setNr(unsigned nr);
+	unsigned 		getX();
+	unsigned 		getY();
+
+	/*!******************************************************************
+	 * \brief Function that returns boolean value about visibility of tile.
+	 * \return Return bool value, if the tile is visible.
+	 * ******************************************************************/
+	bool visible();
 
 
-private:
+protected:
+	unsigned m_nr;
+	unsigned m_size;
+	unsigned m_x;
+	unsigned m_y;
 };
 
 #endif /* TILE_H_ */

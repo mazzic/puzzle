@@ -19,6 +19,8 @@
 class TextTile: public Tile
 {
 public:
+	typedef boost::shared_ptr<TextTile> Ptr;
+
 	/*!*******************************************************************
 	 * \brief Constructor for a text tile.
 	 * \param nr Number that identifies the tile.
@@ -27,12 +29,6 @@ public:
 	 * \param size Size of the tile.
 	 * *******************************************************************/
 	TextTile(unsigned nr, unsigned x, unsigned y, unsigned size);
-
-	/*!*******************************************************************
-	 * \brief Function returns number that identifies the tile.
-	 * \return Number that identifies the tile.
-	 * ******************************************************************/
-	virtual unsigned 	getNr();
 
 	/*!******************************************************************
 	 * \brief Function that sets numbers identifying the tile.
@@ -60,18 +56,6 @@ public:
 	virtual void 		setPosition(unsigned x, unsigned y);
 
 	/*!******************************************************************
-	 * \brief Function returning horizontal position of tile.
-	 * \return y Position of the tile in the horizontal direction [pixels].
-	 * ******************************************************************/
-	virtual unsigned 	getX();
-
-	/*!******************************************************************
-	 * \brief Function returning vertical position of tile.
-	 * \return y Position of the tile in the vertical direction [pixels].
-	 * ******************************************************************/
-	virtual unsigned 	getY();
-
-	/*!******************************************************************
 	 * \brief Function that checks, if mouse click with coordinates x,y
 	 * 		  is in the range of the tile.
 	 * \param x Position of the mouse click in the horizontal direction [pixels].
@@ -91,17 +75,7 @@ public:
 	 * ******************************************************************/
 	virtual void onClick();
 
-	/*!******************************************************************
-	 * \brief Function that returns boolean value about visibility of tile.
-	 * \return Return bool value, if the tile is visible.
-	 * ******************************************************************/
-	virtual bool visible();
-
 private:
-	unsigned m_nr;
-	unsigned m_size;
-	unsigned m_x;
-	unsigned m_y;
 	sf::Shape m_shape;
 	sf::Font font;
 	sf::String text;

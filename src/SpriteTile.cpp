@@ -7,7 +7,8 @@
 
 #include "SpriteTile.h"
 
-SpriteTile::SpriteTile()
+SpriteTile::SpriteTile(unsigned nr, unsigned x, unsigned y, unsigned size) :
+	Tile(nr, x, y, size)
 {
 	// TODO Auto-generated constructor stub
 
