@@ -8,12 +8,23 @@
 
 
 #include "PuzzleGame.h"
+#include "InputParser.h"
 #include <SFML/Window.hpp>
 #include <boost/shared_ptr.hpp>
 
 int main(int argc, char* argv[]) {
-	unsigned gameSize = 3;
-	Settings settings(gameSize, 1024, 768);
+	std::vector<std::string> inputStrings;
+	for(int i = 1; i < argc; ++i)
+		inputStrings.push_back(argv[i]);
+	InputParser parser(inputStrings);
+
+	std::cout << "Width: " << parser.getWidth() << "\n";
+	std::cout << "Height: " << parser.getHeight() << "\n";
+	std::cout << "GameSize: " << parser.getSize() << "\n";
+
+	return EXIT_SUCCESS;
+
+	Settings settings(parser.getSize(), parser.getWidth(), parser.getHeight());
 	sf::RenderWindow window(sf::VideoMode(settings.getScreenWidth(),
 			settings.getScreenHeight(),
 			32),
